@@ -6,22 +6,11 @@ data class MyDate(
   val dayOfMonth: Int
 ): Comparable<MyDate> {
   override fun compareTo(other: MyDate): Int {
-    var formattedMonth = "$month"
-    var formattedDay = "$dayOfMonth"
-    var otherFormattedMonth = "${other.month}"
-    var otherFormattedDay = "${other.dayOfMonth}"
-
-    if (month < 10) formattedMonth = "0$month"
-    if (dayOfMonth < 10) formattedDay = "0$dayOfMonth"
-    if (other.month < 10) otherFormattedMonth = "0${other.month}"
-    if (other.dayOfMonth < 10) otherFormattedDay = "0${other.dayOfMonth}"
-
-    val thisDate = "$year$formattedMonth$formattedDay".toInt()
-    val otherDate = "${other.year}$otherFormattedMonth$otherFormattedDay".toInt()
-
-    if (thisDate == otherDate) return 0
-    if (thisDate < otherDate) return -1
-    return 1
+    if (this == other) return 0
+    if (year > other.year) return 1
+      if (month > other.month) return 1
+        if (dayOfMonth > other.dayOfMonth) return 1
+    return -1
   }
 }
 
