@@ -6,7 +6,6 @@ data class MyDate(
   val dayOfMonth: Int
 ): Comparable<MyDate> {
   override fun compareTo(other: MyDate): Int {
-    if (year > other.year) return 1
     if (year == other.year) {
       if (month == other.month) {
         if (dayOfMonth == other.dayOfMonth) return 0
@@ -14,11 +13,14 @@ data class MyDate(
       }
       if (month > other.month) return 1
     }
+    if (year > other.year) return 1
     return -1
   }
 }
 
-operator fun MyDate.rangeTo(other: MyDate): DateRange = todoTask27()
+operator fun MyDate.rangeTo(other: MyDate): DateRange {
+  return DateRange(start = this, endInclusive = other)
+}
 
 enum class TimeInterval {
     DAY,
